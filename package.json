@@ -1,7 +1,7 @@
 {
   "name": "personal-kanban-electron",
   "version": "0.0.0",
-  "main":"main.js",
+  "main": "dist/main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

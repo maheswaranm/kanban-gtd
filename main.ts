@@ -1,15 +1,27 @@
-const { app, BrowserWindow } = require('electron')
+import { app, BrowserWindow, screen } from 'electron';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+const args = process.argv.slice(1);
+let serve = args.some(val => val === '--serve');
+
+
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({ width: 800, height: 600 })
 
-  // and load the index.html of the app.
-  win.loadFile('./dist/personal-kanban-electron/index.html')
+  // and load the index.html of the app or the angular serve page if we are using serve.
+  if (serve) {
+    require('electron-reload')(__dirname, {
+      electron: require(`${__dirname}/node_modules/electron`)
+    });
+    win.loadURL('http://localhost:4200');
+  } else {
+    win.loadFile('./dist/index.html')
+  } 
+
 
   // Open the DevTools.
   win.webContents.openDevTools()
@@ -44,6 +56,3 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
