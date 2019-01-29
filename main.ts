@@ -15,7 +15,7 @@ function createWindow () {
   // and load the index.html of the app or the angular serve page if we are using serve.
   if (serve) {
     require('electron-reload')(__dirname, {
-      electron: require(`${__dirname}/node_modules/electron`)
+      electron: require(`../node_modules/electron`)
     });
     win.loadURL('http://localhost:4200');
   } else {
