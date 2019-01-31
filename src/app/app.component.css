@@ -1,0 +1,12 @@
+.sortable {
+  background: #eee;
+  border-radius: 0.25rem;
+  min-height: 65px;
+  padding-bottom: 25px;
+}
+
+
+.card {
+	height: 30px;
+  cursor: pointer; 
+}
