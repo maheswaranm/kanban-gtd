@@ -50,7 +50,6 @@ ipcMain.on('update', (event, arg) => {
 });
 
 ipcMain.on('load', (event, arg) => {
-  console.log(arg);
   event.returnValue = fs.readFileSync(filepath, 'utf8');
 });
 
