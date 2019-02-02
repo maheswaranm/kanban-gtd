@@ -20,7 +20,7 @@ import { MYBOARD, EMPTYBOARD } from './mocks/mock-board';
 })
 export class AppComponent {
   constructor(private _electronService: ElectronService, private modalService: NgbModal) { 
-    this.board = JSON.parse(this._electronService.ipcRenderer.sendSync('load',123)); 
+    this.board = JSON.parse(this._electronService.ipcRenderer.sendSync('load')); 
   }
 
   title = 'personal-kanban-electron';

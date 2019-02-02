@@ -49,7 +49,7 @@ ipcMain.on('update', (event, arg) => {
   event.returnValue = 'done'
 });
 
-ipcMain.on('load', (event, arg) => {
+ipcMain.on('load', (event) => {
   event.returnValue = fs.readFileSync(filepath, 'utf8');
 });
 
