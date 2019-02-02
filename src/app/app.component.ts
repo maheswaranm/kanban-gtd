@@ -8,6 +8,7 @@ import { SortablejsOptions } from 'angular-sortablejs';
 import { ElectronService } from 'ngx-electron';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { CardDetailModalComponent } from './card-detail-modal/card-detail-modal.component'
 
 import { MYBOARD, EMPTYBOARD } from './mocks/mock-board';
 
@@ -37,34 +38,9 @@ export class AppComponent {
   };
 
 
-  showCardDetail(content:any, card: Card): void {
-    const cardDetailModelRef = this.modalService.open(NgbdModalContent);
+  showCardDetail(card: Card): void {
+    const cardDetailModelRef = this.modalService.open(CardDetailModalComponent);
     cardDetailModelRef.componentInstance.card = card;
   }
 
 }
-
-
-@Component({
-  selector: 'ngbd-modal-content',
-  template: `
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Card Details</h4>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div>
-            {{ card.text }}
-        </div>
-    </div>
-  `
-})
-export class NgbdModalContent {
-  @Input() card: Card;
-
-  constructor(public activeModal: NgbActiveModal) {}
-}
-
-

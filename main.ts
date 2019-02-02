@@ -53,3 +53,11 @@ ipcMain.on('load', (event, arg) => {
   event.returnValue = fs.readFileSync(filepath, 'utf8');
 });
 
+ipcMain.on('updateCard', (event, arg) => {
+  let cardid = arg.id;
+  let cardobj = arg;
+
+  console.log("have to update "+cardid);
+  event.returnValue = 'done'
+});
+

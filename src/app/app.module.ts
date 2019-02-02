@@ -8,15 +8,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxElectronModule } from 'ngx-electron';
 
 
-import { AppComponent,NgbdModalContent } from './app.component';
+import { AppComponent } from './app.component';
+import { CardDetailModalComponent } from './card-detail-modal/card-detail-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NgbdModalContent
+    CardDetailModalComponent
   ],
   entryComponents: [
-      NgbdModalContent
+     CardDetailModalComponent
   ],
   imports: [
     BrowserModule, 
