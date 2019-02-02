@@ -1,5 +1,8 @@
+import "reflect-metadata";
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as fs from 'fs';
+import {createConnection} from "typeorm";
+import { User } from "./data/entity/User";
 
 let win
 
@@ -20,6 +23,14 @@ function createWindow () {
   } else {
     win.loadFile('./dist/index.html')
   } 
+
+
+  createConnection().then(async connection => {
+    console.log("Loading users from the database...");
+    const users = await connection.manager.find(User);
+    console.log("Loaded users: ", users);
+
+}).catch(error => console.log(error));
 
 
   win.on('closed', () => {
