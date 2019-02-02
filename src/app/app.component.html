@@ -1,5 +1,6 @@
 <div>{{ title }}</div>
 <div>{{ board.id }} - {{ board.name }}</div>
+<button class="btn" (click)=showNewCardModal() > Add a new card </button>
 <div class="lane" *ngFor="let thislane of board.lanes">
   <div>
     {{ thislane.name }}

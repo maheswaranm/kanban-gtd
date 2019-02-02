@@ -9,6 +9,7 @@ import { ElectronService } from 'ngx-electron';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CardDetailModalComponent } from './card-detail-modal/card-detail-modal.component'
+import { NewCardModalComponent } from './new-card-modal/new-card-modal.component';
 
 import { MYBOARD, EMPTYBOARD } from './mocks/mock-board';
 
@@ -41,6 +42,13 @@ export class AppComponent {
   showCardDetail(card: Card): void {
     const cardDetailModelRef = this.modalService.open(CardDetailModalComponent);
     cardDetailModelRef.componentInstance.card = card;
+  }
+
+
+  showNewCardModal() {
+    const cardDetailModelRef = this.modalService.open(NewCardModalComponent).result.then((result) => {
+      this.board = JSON.parse(this._electronService.ipcRenderer.sendSync('load')); 
+    }, (reason)=> {});
   }
 
 }

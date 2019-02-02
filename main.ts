@@ -61,3 +61,10 @@ ipcMain.on('updateCard', (event, arg) => {
   event.returnValue = 'done'
 });
 
+ipcMain.on('addCard', (event, arg) => {
+  let cardtext = arg;
+ 
+  console.log("have to add new card "+cardtext);
+  event.returnValue = 'done'
+});
+
