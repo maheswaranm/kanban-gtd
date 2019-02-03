@@ -3,6 +3,9 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as fs from 'fs';
 import {createConnection} from "typeorm";
 import { User } from "./data/entity/User";
+import { Board } from "./data/entity/board";
+import { Lane } from "./data/entity/lane";
+import { Card } from "./data/entity/card";
 
 let win
 
@@ -26,10 +29,16 @@ function createWindow () {
 
 
   createConnection().then(async connection => {
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
+    const boards = await connection.manager.find(Board);
+    console.log("Loaded boards: ", boards);
 
+
+    const lanes = await connection.manager.find(Lane);
+    console.log("Loaded lanes: ", lanes);
+
+
+    const cards = await connection.manager.find(Card);
+    console.log("Loaded cards: ", cards);
 }).catch(error => console.log(error));
 
 
