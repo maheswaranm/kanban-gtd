@@ -44,3 +44,4 @@ Thumbs.db
 
 # sqlite db for testing
 *.sqlite
+*.sqlite-journal
