@@ -11,6 +11,9 @@ export class Card {
     @Column()
     text: string;
 
+    @Column()
+    position: number;
+
     @ManyToOne(type => Lane, lane => lane.cards, { 
     	cascade: true
     })
