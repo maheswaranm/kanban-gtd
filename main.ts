@@ -7,6 +7,8 @@ import { Board } from "./data/entity/board";
 import { Lane } from "./data/entity/lane";
 import { Card } from "./data/entity/card";
 
+import { DBService } from "./data/service/db-service";
+
 let win
 
 const args = process.argv.slice(1);
@@ -91,8 +93,10 @@ ipcMain.on('updateCard', (event, arg) => {
 
 ipcMain.on('addCard', (event, arg) => {
   let cardtext = arg;
+
+  let dbservice = new DBService();
+  dbservice.addCard(1, cardtext); // default add to backlog for test
  
-  console.log("have to add new card "+cardtext);
   event.returnValue = 'done'
 });
 
