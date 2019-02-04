@@ -47,4 +47,25 @@ export class DBService {
 		addNewCard();
 	}
 
+	updateCard(cardid: number, cardtext:string) {
+		let connection = getConnection();
+
+		async function updateCard(): Promise<void> {
+			try {
+				let cardRepo = connection.getRepository(Card);
+
+				let cardToUpdate = await cardRepo.findOne(cardid);
+				cardToUpdate.text = cardtext;
+
+				await cardRepo.save(cardToUpdate);
+			}
+			catch(err) {
+				console.log(err);
+			}
+		}
+
+		updateCard();
+
+	}
+
 }

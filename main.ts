@@ -86,9 +86,10 @@ ipcMain.on('load', (event) => {
 
 ipcMain.on('updateCard', (event, arg) => {
   let cardid = arg.id;
-  let cardobj = arg;
+  let cardtext = arg.text;
 
-  console.log("have to update "+cardid);
+  dbservice.updateCard(cardid, cardtext);
+
   event.returnValue = 'done'
 });
 
