@@ -29,9 +29,17 @@ function createWindow () {
 
 
   createConnection().then(async connection => {
+    let boardRepo = connection.getRepository(Board);
+    let laneRepo = connection.getRepository(Lane);
+
+    let board = await boardRepo.findOne(1);
+
+    let laneBacklog = await laneRepo.findOne({ name:"Backlog" });
+    let laneDoing = await laneRepo.findOne({ name:"Doing" });
+    let laneDone = await laneRepo.findOne({ name:"Done" });
+
     const boards = await connection.manager.find(Board);
     console.log("Loaded boards: ", boards);
-
 
     const lanes = await connection.manager.find(Lane);
     console.log("Loaded lanes: ", lanes);
