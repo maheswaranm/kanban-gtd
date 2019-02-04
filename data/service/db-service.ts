@@ -68,4 +68,30 @@ export class DBService {
 
 	}
 
+	getBoard(boardid: number): Promise<Board> {
+		let connection = getConnection();
+		let allboarddata = {} ;
+
+		async function getBoardData(boardid: number): Promise<Board> {
+			try {
+				let boardRepo = connection.getRepository(Board);
+
+				let boarddata = await boardRepo.findOne({ where : { id : boardid }, relations: ["lanes", "lanes.cards"] })
+
+				console.log('in function -> ' + JSON.stringify(boarddata));
+
+				return boarddata;
+
+			}
+			catch(err) {
+				console.log(err);
+				return null;
+			}
+
+		}
+
+		return getBoardData(boardid);
+
+	}
+
 }

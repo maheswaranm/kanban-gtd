@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectorRef } from '@angular/core';
 
 import { Card } from './classes/card';
 import { Board } from './classes/board';
@@ -19,8 +19,16 @@ import { MYBOARD, EMPTYBOARD } from './mocks/mock-board';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private _electronService: ElectronService, private modalService: NgbModal) { 
-    this.board = JSON.parse(this._electronService.ipcRenderer.sendSync('load')); 
+  constructor(private _electronService: ElectronService, private modalService: NgbModal, private ref: ChangeDetectorRef) { 
+  }
+
+  ngOnInit() {
+    this._electronService.ipcRenderer.send('load');
+    this._electronService.ipcRenderer.once('load-reply', (event, board) => {
+      console.log(board);
+      this.board = board;
+      this.ref.detectChanges(); 
+    });
   }
 
   title = 'personal-kanban-electron';

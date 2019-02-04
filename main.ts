@@ -81,10 +81,9 @@ ipcMain.on('update', (event, arg) => {
 });
 
 ipcMain.on('load', (event) => {
-
-
-
-  event.returnValue = fs.readFileSync(filepath, 'utf8');
+  dbservice.getBoard(1).then(board => {
+    event.sender.send('load-reply', board)
+  });
 });
 
 ipcMain.on('updateCard', (event, card) => {
