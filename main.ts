@@ -14,6 +14,7 @@ let win
 const args = process.argv.slice(1);
 let serve = args.some(val => val === '--serve');
 let filepath = app.getPath('appData')+'/kanban.json'
+let dbservice = new DBService();
 
 
 function createWindow () {
@@ -94,7 +95,6 @@ ipcMain.on('updateCard', (event, arg) => {
 ipcMain.on('addCard', (event, arg) => {
   let cardtext = arg;
 
-  let dbservice = new DBService();
   dbservice.addCard(1, cardtext); // default add to backlog for test
  
   event.returnValue = 'done'
