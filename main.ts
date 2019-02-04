@@ -81,21 +81,19 @@ ipcMain.on('update', (event, arg) => {
 });
 
 ipcMain.on('load', (event) => {
+
+
+
   event.returnValue = fs.readFileSync(filepath, 'utf8');
 });
 
-ipcMain.on('updateCard', (event, arg) => {
-  let cardid = arg.id;
-  let cardtext = arg.text;
-
-  dbservice.updateCard(cardid, cardtext);
+ipcMain.on('updateCard', (event, card) => {
+  dbservice.updateCard(card.id, card.text);
 
   event.returnValue = 'done'
 });
 
-ipcMain.on('addCard', (event, arg) => {
-  let cardtext = arg;
-
+ipcMain.on('addCard', (event, cardtext) => {
   dbservice.addCard(1, cardtext); // default add to backlog for test
  
   event.returnValue = 'done'
