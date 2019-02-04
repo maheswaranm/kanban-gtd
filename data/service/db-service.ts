@@ -7,7 +7,7 @@ import { Lane } from "../entity/lane";
 import { Card } from "../entity/card";
 
 export class DBService {
-	addCard(laneid: number, cardtext: string) {
+	addCard(laneid: number, cardtext: string): Promise<void> {
 		let connection = getConnection();
 
 		async function addNewCard(): Promise<void> {
@@ -44,7 +44,7 @@ export class DBService {
 
 		}
 
-		addNewCard();
+		return addNewCard();
 	}
 
 	updateCard(cardid: number, cardtext:string) {

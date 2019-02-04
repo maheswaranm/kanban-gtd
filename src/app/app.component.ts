@@ -19,12 +19,9 @@ import { MYBOARD, EMPTYBOARD } from './mocks/mock-board';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private _electronService: ElectronService, private modalService: NgbModal, private ref: ChangeDetectorRef) { 
-  }
-
-  ngOnInit() {
+  constructor( private _electronService: ElectronService, private modalService: NgbModal, private ref: ChangeDetectorRef) { 
     this._electronService.ipcRenderer.send('load');
-    this._electronService.ipcRenderer.once('load-reply', (event, board) => {
+    this._electronService.ipcRenderer.on('update-board', (event, board) => {
       console.log(board);
       this.board = board;
       this.ref.detectChanges(); 
@@ -46,17 +43,21 @@ export class AppComponent {
     }
   };
 
-
-  showCardDetail(card: Card): void {
-    const cardDetailModelRef = this.modalService.open(CardDetailModalComponent);
-    cardDetailModelRef.componentInstance.card = card;
   }
+
+  showCardDetail(card: Card) {
+    console.log('click');
+    const cardDetailModalRef = this.modalService.open(CardDetailModalComponent);
+    cardDetailModalRef.componentInstance.card = card;
+    console.log('done');
+
+    console.log('here-->'+this.modalService.hasOpenModals())
+  };
 
 
   showNewCardModal() {
-    const cardDetailModelRef = this.modalService.open(NewCardModalComponent).result.then((result) => {
-      this.board = JSON.parse(this._electronService.ipcRenderer.sendSync('load')); 
-    }, (reason)=> {});
+    const cardDetailModelRef = this.modalService.open(NewCardModalComponent);
+  }
   }
 
 }

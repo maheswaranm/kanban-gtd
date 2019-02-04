@@ -82,7 +82,7 @@ ipcMain.on('update', (event, arg) => {
 
 ipcMain.on('load', (event) => {
   dbservice.getBoard(1).then(board => {
-    event.sender.send('load-reply', board)
+    event.sender.send('update-board', board)
   });
 });
 
@@ -93,8 +93,13 @@ ipcMain.on('updateCard', (event, card) => {
 });
 
 ipcMain.on('addCard', (event, cardtext) => {
-  dbservice.addCard(1, cardtext); // default add to backlog for test
- 
-  event.returnValue = 'done'
+  dbservice.addCard(1, cardtext).then(
+    () => {
+      dbservice.getBoard(1).then(board => {
+        event.sender.send('update-board',board);
+      });
+    }
+
+    ); // default add to backlog for test
 });
 

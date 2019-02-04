@@ -17,7 +17,7 @@ export class NewCardModalComponent implements OnInit {
 
   addNewCard(modalForm: any) {
   	let text = modalForm.value.cardtext;
-  	let updateresult: string = this._electronService.ipcRenderer.sendSync('addCard',text);
+  	this._electronService.ipcRenderer.send('addCard',text);
   }
 
 }
