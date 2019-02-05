@@ -21,7 +21,6 @@ export class DBService {
 			    							.from(Card, "card")
 			    							.where("card.lane = :laneid", {laneid : lane.id})
 			    							.getRawOne();
-			    console.log('maxCardPos' + JSON.stringify(maxCardPos));
 
 			    if(maxCardPos == null) {
 			    	maxCardPos.maxposition = 0
@@ -34,8 +33,6 @@ export class DBService {
 			    newCard.position = maxCardPos.maxposition + 1;
 
 			    await cardRepo.save(newCard);
-
-			    console.log('added card');
 
 			}
 			catch(err) {
@@ -77,8 +74,6 @@ export class DBService {
 				let boardRepo = connection.getRepository(Board);
 
 				let boarddata = await boardRepo.findOne({ where : { id : boardid }, relations: ["lanes", "lanes.cards"] })
-
-				console.log('in function -> ' + JSON.stringify(boarddata));
 
 				return boarddata;
 
