@@ -2,6 +2,7 @@ import { Component, Input, NgZone } from '@angular/core';
 
 import { Card } from './classes/card';
 import { Board } from './classes/board';
+import { Lane } from './classes/lane';
 
 import { SortablejsOptions } from 'angular-sortablejs';
 
@@ -24,8 +25,8 @@ export class AppComponent {
     this._electronService.ipcRenderer.on('update-board', (event, board) => {
       this.zone.run(
           () => {
-              console.log(board);      
               this.board = board;
+              this.sortAllCards(board)
           }
         );
 
@@ -55,6 +56,25 @@ export class AppComponent {
 
   showNewCardModal() {
     const cardDetailModelRef = this.modalService.open(NewCardModalComponent);
+  }
+
+
+  private sortAllCards(board:Board): Board {
+      let newBoard = new Board();
+
+      newBoard.id = board.id;
+      newBoard.name = board.name;
+      newBoard.lanes = [];
+
+      for(let thislane in board.lanes) {
+          console.log(board.lanes[thislane]);
+          let newLane = board.lanes[thislane];
+          newLane.cards.sort((card1, card2) => card1.position - card2.position);
+
+          newBoard.lanes.push(newLane);
+      }
+
+      return newBoard;
   }
 
 }
