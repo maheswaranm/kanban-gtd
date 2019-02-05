@@ -7,7 +7,7 @@
   </div>
   <div class="row sortable" id = "{{ thislane.id }}" [sortablejs]="thislane.cards" [sortablejsOptions]="normalOptions">
     <div class="col-12 card" *ngFor="let thiscard of thislane.cards">
-        <div (click)=showCardDetail(thiscard)>{{ thiscard.id }} - {{ thiscard.text }}</div>
+        <div (click)=showCardDetail(thiscard)>{{ thiscard.id }} - {{ thiscard.text }} - {{ thiscard.position }}</div>
     </div>
   </div>
 </div>
