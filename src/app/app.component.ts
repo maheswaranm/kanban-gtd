@@ -40,10 +40,11 @@ export class AppComponent {
   normalOptions: SortablejsOptions = {
     group: 'normal-group',
     onEnd: (event: any) => {
-      console.log('from ' + event.from.id + ' at ' + event.oldIndex + ' to ' + event.to.id + ' at ' + event.newIndex );
+      let oldPos = event.oldIndex+1;
+      let newPos = event.newIndex+1;
 
-      if(this._electronService.isElectronApp) {
-            let updateresult: string = this._electronService.ipcRenderer.sendSync('update',this.board);
+      if(oldPos != newPos || (oldPos == newPos && event.from.id !=  event.to.id )) {
+            this._electronService.ipcRenderer.send('updateBoard',event.from.id, oldPos , event.to.id, newPos );
       }
     }
   };
@@ -67,7 +68,6 @@ export class AppComponent {
       newBoard.lanes = [];
 
       for(let thislane in board.lanes) {
-          console.log(board.lanes[thislane]);
           let newLane = board.lanes[thislane];
           newLane.cards.sort((card1, card2) => card1.position - card2.position);
 

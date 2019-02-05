@@ -61,6 +61,16 @@ ipcMain.on('update', (event, arg) => {
   event.returnValue = 'done'
 });
 
+ipcMain.on('updateBoard', (event, fromLaneId, oldPos, toLaneId, newPos) => {
+  dbservice.updateBoard(fromLaneId, oldPos, toLaneId, newPos).then(
+    () => {
+      dbservice.getBoard(1).then(board => {
+        event.sender.send('update-board',board);
+      });
+    }
+    );
+});
+
 ipcMain.on('load', (event) => {
   dbservice.getBoard(1).then(board => {
     event.sender.send('update-board', board)

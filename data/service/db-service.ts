@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import {getConnection} from "typeorm";
+import {getConnection, UpdateResult} from "typeorm";
 
 import {createConnection} from "typeorm";
 import { Board } from "../entity/board";
@@ -86,6 +86,92 @@ export class DBService {
 		}
 
 		return getBoardData(boardid);
+
+	}
+
+	updateBoard(fromLaneId, oldPos, toLaneId, newPos): Promise<Card> {
+		let connection = getConnection();
+
+		let boardRepo = connection.getRepository(Board);
+		let cardRepo = connection.getRepository(Card);
+		let laneRepo = connection.getRepository(Lane);
+
+		async function updateBoard():Promise<UpdateResult> {
+			try {
+
+				let cardtoupdate = await cardRepo.findOne({position:oldPos, lane:fromLaneId});
+				cardtoupdate.position = -1;
+				await cardRepo.save(cardtoupdate);
+
+				let updateresult
+
+				if(fromLaneId == toLaneId) {
+					if(newPos < oldPos) {
+					updateresult = await connection.createQueryBuilder()
+								.update(Card)
+								.set({position: () => "position + 1"  })
+								.where('laneid = :fromLane and position >= :newIndex and position < :oldIndex'
+									, { fromLane:fromLaneId, oldIndex: oldPos, newIndex: newPos})
+								.execute();
+
+					}
+					else {
+
+					updateresult = await connection.createQueryBuilder()
+								.update(Card)
+								.set({position: () => "position - 1"  })
+								.where('laneid = :fromLane and position <= :newIndex and position > :oldIndex'
+									, { fromLane:fromLaneId, oldIndex: oldPos, newIndex: newPos})
+								.execute();
+
+					}					
+				}
+				else {
+
+					let updateSource = await connection.createQueryBuilder()
+											.update(Card)
+											.set({position: () => "position - 1"  })
+											.where('laneid = :fromLane and position >= :oldIndex'
+													, { fromLane:fromLaneId, oldIndex: oldPos})
+											.execute();
+
+					updateresult = await connection.createQueryBuilder()
+											.update(Card)
+											.set({position: () => "position + 1"  })
+											.where('laneid = :toLane and position >= :newIndex'
+													, { toLane:toLaneId, newIndex: newPos})
+											.execute();
+
+
+				}
+
+
+				return updateresult;
+
+			}
+			catch(err) {
+				console.log(err);
+			}
+		}
+
+		async function updateCard():Promise<Card> {
+			let cardtoupdate = await cardRepo.findOne({position:-1, lane:fromLaneId});
+			cardtoupdate.position = newPos;	
+			if(fromLaneId != toLaneId) {
+				cardtoupdate.lane = await laneRepo.findOne(toLaneId);
+			}
+
+			let result = await cardRepo.save(cardtoupdate);
+
+			return result
+		}
+
+
+		return updateBoard().then(
+			() => {
+				return updateCard();
+			}
+			);
 
 	}
 
