@@ -53,14 +53,6 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.on('update', (event, arg) => {
-  fs.writeFile(filepath, JSON.stringify(arg), (err)=>{
-    if(err) throw err;
-  });
-
-  event.returnValue = 'done'
-});
-
 ipcMain.on('updateBoard', (event, fromLaneId, oldPos, toLaneId, newPos) => {
   dbservice.updateBoard(fromLaneId, oldPos, toLaneId, newPos).then(
     () => {
