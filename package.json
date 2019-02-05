@@ -1,6 +1,8 @@
 {
    "name": "personal-kanban-electron",
-   "version": "0.0.0",
+   "description":"Personal Kanban for all",
+   "author":"Maheswaran Moothiringode",
+   "version": "0.0.1",
    "main": "dist/main.js",
    "scripts": {
       "ng": "ng",
@@ -13,7 +15,24 @@
       "electron:tsc": "tsc -p tsconfig-electron.json",
       "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:tsc && electron . --serve",
       "electron:serve-tsc": "tsc -w -p tsconfig-electron.json",
-      "postinstall": "electron-builder install-app-deps"
+      "postinstall": "electron-builder install-app-deps",
+      "dist": "electron-builder"
+   },
+   "build": {
+     "appId": "com.maheswaranm",
+     "directories": {
+       "output": "release/"
+     },
+     "mac": {
+       "target": "dmg"
+     },
+     "win": {
+         "target": "nsis"
+      },
+      "nsis": {
+         "oneClick": false,
+         "allowElevation": false
+      }
    },
    "private": true,
    "dependencies": {
