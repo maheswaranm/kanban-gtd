@@ -12,8 +12,6 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardDetailModalComponent } from './card-detail-modal/card-detail-modal.component'
 import { NewCardModalComponent } from './new-card-modal/new-card-modal.component';
 
-import { MYBOARD, EMPTYBOARD } from './mocks/mock-board';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -34,7 +32,7 @@ export class AppComponent {
   }
 
   title = 'personal-kanban-electron';
-  board = EMPTYBOARD;
+  board = null;
   
 
   normalOptions: SortablejsOptions = {
