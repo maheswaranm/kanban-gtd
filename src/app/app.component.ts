@@ -11,6 +11,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CardDetailModalComponent } from './card-detail-modal/card-detail-modal.component'
 import { NewCardModalComponent } from './new-card-modal/new-card-modal.component';
+import { AddBoardModalComponent } from './add-board-modal/add-board-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,9 @@ export class AppComponent {
       this.zone.run(
           () => {
               this.board = board;
-              this.sortAllCards(board)
+              if(board != null) {
+                this.sortAllCards(board)
+              }
           }
         );
 
@@ -73,6 +76,14 @@ export class AppComponent {
       }
 
       return newBoard;
+  }
+
+  isBoardEmpty() {
+    return this.board == null;
+  }
+
+  addBoardModal() {
+    this.modalService.open(AddBoardModalComponent);
   }
 
 }

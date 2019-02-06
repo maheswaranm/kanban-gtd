@@ -88,3 +88,13 @@ ipcMain.on('addCard', (event, cardtext) => {
     ); // default add to backlog for test
 });
 
+ipcMain.on('addBoard', (event, boardname, lanenames) => {
+  dbservice.addBoard(boardname, lanenames).then(
+    () => {
+      dbservice.getBoard(1).then(board => {
+        event.sender.send('update-board',board);
+      });
+    }
+    );
+});
+

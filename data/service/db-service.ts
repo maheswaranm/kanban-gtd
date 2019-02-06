@@ -175,4 +175,32 @@ export class DBService {
 
 	}
 
+
+	addBoard(boardname:string, lanenames:string[]):Promise<Board> {
+		let connection = getConnection();
+
+		let boardRepo = connection.getRepository(Board);
+		let laneRepo = connection.getRepository(Lane);
+
+		async function addBoard() {
+			let newboard = new Board();
+			newboard.name = boardname;
+
+			for(let lane in lanenames) {
+				let newlane = new Lane();
+				newlane.board = newboard;
+				newlane.name = lanenames[lane];
+
+				await laneRepo.save(newlane);
+			}
+
+			return await boardRepo.save(newboard);
+
+		}
+
+		return addBoard();
+
+
+	}
+
 }

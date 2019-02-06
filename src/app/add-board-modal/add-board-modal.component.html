@@ -1,0 +1,27 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add a new Board</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form #modalForm="ngForm">
+    <div class="modal-body">
+    	<div>
+      	<label>Name of Board : </label><input type="input-group-text" name="boardname" ngModel />
+      	</div>
+      	<div ngModelGroup="lanes">
+      	<div *ngFor="let number of numbers">
+      		<label>Name of lane : </label><input type="input-group-text" name="lane{{number}}name" ngModel />
+      	</div>
+      	<div>
+      		<button class="btn btn-outline-dark" (click)="increaseLaneCount()" *ngIf="count < 5">Add lane</button>
+      		<button class="btn btn-outline-dark" (click)="decreaseLaneCount()" *ngIf="count > 1">Remove lane</button>
+      	</div>
+      	</div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" (click)="createBoard(modalForm);activeModal.close('Save click');">Create</button>
+    </div>
+  </form>
+</div>

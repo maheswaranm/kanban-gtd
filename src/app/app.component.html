@@ -1,13 +1,21 @@
 <div>{{ title }}</div>
-<div>{{ board.id }} - {{ board.name }}</div>
-<button class="btn" (click)=showNewCardModal() > Add a new card </button>
-<div class="lane" *ngFor="let thislane of board.lanes">
-  <div>
-    {{ thislane.name }}
-  </div>
-  <div class="row sortable" id = "{{ thislane.id }}" [sortablejs]="thislane.cards" [sortablejsOptions]="normalOptions">
-    <div class="col-12 card" *ngFor="let thiscard of thislane.cards">
-        <div (click)=showCardDetail(thiscard)>{{ thiscard.id }} - {{ thiscard.text }} - {{ thiscard.position }}</div>
-    </div>
-  </div>
+<div *ngIf="isBoardEmpty()">
+	<div>
+		<div>No Boards</div>
+		<button class="btn" (click)="addBoardModal()">Add a new Board</button>
+	</div>
+</div>
+<div *ngIf="!isBoardEmpty()">
+	<div>{{ board.id }} - {{ board.name }}</div>
+	<button class="btn" (click)=showNewCardModal() > Add a new card </button>
+	<div class="lane" *ngFor="let thislane of board.lanes">
+	  <div>
+	    {{ thislane.name }}
+	  </div>
+	  <div class="row sortable" id = "{{ thislane.id }}" [sortablejs]="thislane.cards" [sortablejsOptions]="normalOptions">
+	    <div class="col-12 card" *ngFor="let thiscard of thislane.cards">
+	        <div (click)=showCardDetail(thiscard)>{{ thiscard.id }} - {{ thiscard.text }} - {{ thiscard.position }}</div>
+	    </div>
+	  </div>
+	</div>
 </div>

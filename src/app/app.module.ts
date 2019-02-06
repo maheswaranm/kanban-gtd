@@ -11,15 +11,17 @@ import { NgxElectronModule } from 'ngx-electron';
 import { AppComponent } from './app.component';
 import { CardDetailModalComponent } from './card-detail-modal/card-detail-modal.component';
 import { NewCardModalComponent } from './new-card-modal/new-card-modal.component';
+import { AddBoardModalComponent } from './add-board-modal/add-board-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardDetailModalComponent,
-    NewCardModalComponent
+    NewCardModalComponent,
+    AddBoardModalComponent
   ],
   entryComponents: [
-     CardDetailModalComponent, NewCardModalComponent
+     CardDetailModalComponent, NewCardModalComponent, AddBoardModalComponent
   ],
   imports: [
     BrowserModule, 
