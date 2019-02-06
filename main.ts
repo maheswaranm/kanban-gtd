@@ -11,6 +11,8 @@ import { DBService } from "./data/service/db-service";
 
 let win
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
 const args = process.argv.slice(1);
 let serve = args.some(val => val === '--serve');
 let filepath = app.getPath('appData')+'/kanban.json'
