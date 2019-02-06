@@ -29,11 +29,31 @@ function createWindow () {
     win.loadURL('http://localhost:4200');
     win.webContents.openDevTools()
   } else {
-    win.loadFile('./dist/index.html')
+    win.loadFile(__dirname+'/index.html')
   } 
 
 
-  createConnection();
+  createConnection({
+   "type": "sqlite",
+   "database": app.getPath('userData')+"/database.sqlite",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+       "./dist/data/entity/*.js",
+       __dirname+"/data/entity/*.js"
+   ],
+   "migrations": [
+      "src/migration/**/*.ts"
+   ],
+   "subscribers": [
+      "src/subscriber/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "data/entity",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+   }
+});
 
 
   win.on('closed', () => {
