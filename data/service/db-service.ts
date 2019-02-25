@@ -31,6 +31,7 @@ export class DBService {
 			    newCard.text = cardtext;
 			    newCard.lane = lane;
 			    newCard.position = maxCardPos.maxposition + 1;
+			    newCard.create_time = new Date();
 
 			    await cardRepo.save(newCard);
 

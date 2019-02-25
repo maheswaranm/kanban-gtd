@@ -18,4 +18,10 @@ export class Card {
     	cascade: true
     })
     lane: Lane;
+
+    @Column()
+    create_time: Date;
+
+    @Column()
+    update_time: Date;
   }
