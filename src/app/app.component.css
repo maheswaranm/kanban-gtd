@@ -5,11 +5,29 @@
   padding-bottom: 25px;
 }
 
+.lane {
+	width: 90%;
+	margin: 0 auto;
+
+	background: black;
+	border-radius: 0.25rem;
+}
+
+.lane-name {
+	color: white;
+}
+
 
 .card {
 	height: 30px;
     cursor: pointer; 
 }
+
+.card-text {
+	display:inline-block;
+	cursor: initial;
+}
+
 
 .dragger {
 	-webkit-app-region: drag;
