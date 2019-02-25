@@ -1,4 +1,7 @@
-<div>{{ title }}</div>
+<div class="navbar bg-primary pt-3 dragger">
+  <div class="navbar-brand text-white">{{ title }}</div>
+  <div *ngIf="!isBoardEmpty()" class="text-white">{{ board.name }}</div>
+</div>
 <div *ngIf="isBoardEmpty()">
 	<div>
 		<div>No Boards</div>

@@ -8,5 +8,10 @@
 
 .card {
 	height: 30px;
-  cursor: pointer; 
+    cursor: pointer; 
+}
+
+.dragger {
+	-webkit-app-region: drag;
+	cursor: grab;
 }
