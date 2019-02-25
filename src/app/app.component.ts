@@ -34,7 +34,7 @@ export class AppComponent {
     });
   }
 
-  title = 'personal-kanban-electron';
+  title = 'Personal Kanban';
   board = null;
   
 

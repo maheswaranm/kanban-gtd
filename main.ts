@@ -20,7 +20,8 @@ let dbservice = new DBService();
 
 
 function createWindow () {
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({ titleBarStyle: 'hidden', frame:false, width: 800, 
+    height: 600, minWidth: 800, minHeight: 600 })
 
   if (serve) {
     require('electron-reload')(__dirname, {
