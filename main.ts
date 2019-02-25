@@ -37,7 +37,6 @@ function createWindow () {
   createConnection({
    "type": "sqlite",
    "database": app.getPath('userData')+"/database.sqlite",
-   "synchronize": true,
    "logging": false,
    "entities": [
        "./dist/data/entity/*.js",
