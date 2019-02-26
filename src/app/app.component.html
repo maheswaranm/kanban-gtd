@@ -17,7 +17,7 @@
 	  <div class="row sortable" id = "{{ thislane.id }}" [sortablejs]="thislane.cards" [sortablejsOptions]="normalOptions">
 	    <div class="card col-12" *ngFor="let thiscard of thislane.cards">
 	        <div (click)=showCardDetail(thiscard)>
-	        	<div class="card-text">{{ thiscard.id }} - {{ thiscard.text }} - {{ thiscard.position }}</div>
+	        	<div class="card-text">{{ thiscard.text }}</div>
 	        </div>
 	    </div>
 	  </div>
