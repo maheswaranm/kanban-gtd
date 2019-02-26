@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as fs from 'fs';
 import {createConnection} from "typeorm";
-import { User } from "./data/entity/User";
 import { Board } from "./data/entity/board";
 import { Lane } from "./data/entity/lane";
 import { Card } from "./data/entity/card";
