@@ -2,7 +2,7 @@
 
 A fully offline Kanban board built using Electron and AngularJS
 
-[v0.0.1 look of personal kanban](images/v0.0.1-screenshot.png)
+![v0.0.1 look of personal kanban](images/v0.0.1-screenshot.png)
 
 
 
