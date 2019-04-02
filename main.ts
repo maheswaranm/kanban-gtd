@@ -23,9 +23,6 @@ function createWindow () {
     height: 600, minWidth: 800, minHeight: 600 })
 
   if (serve) {
-    require('electron-reload')(__dirname, {
-      electron: require(`../node_modules/electron`)
-    });
     win.loadURL('http://localhost:4200');
     win.webContents.openDevTools()
   } else {
@@ -92,7 +89,7 @@ ipcMain.on('updateCard', (event, card) => {
 });
 
 ipcMain.on('addCard', (event, cardtext) => {
-  dbservice.addCard(1, cardtext).then(
+  dbservice.addCard(3, cardtext).then(
     () => {
       dbservice.getBoard(1).then(board => {
         event.sender.send('update-board',board);
