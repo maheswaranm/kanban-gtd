@@ -34,18 +34,13 @@ function createWindow () {
 
 
   createConnection({
-   "type": "sqlite",
-   "database": app.getPath('userData')+"/database.sqlite",
+   "type": "sqljs",
+   "location": app.getPath('userData')+"/database.sqlite",
    "logging": false,
+   "autoSave":true,
    "entities": [
        "./dist/data/entity/*.js",
        __dirname+"/data/entity/*.js"
-   ],
-   "migrations": [
-      "src/migration/**/*.ts"
-   ],
-   "subscribers": [
-      "src/subscriber/**/*.ts"
    ],
    "cli": {
       "entitiesDir": "data/entity",
