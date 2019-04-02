@@ -17,7 +17,7 @@
       "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:tsc && electron . --serve",
       "electron:serve-tsc": "tsc -w -p tsconfig-electron.json",
       "postinstall": "electron-builder install-app-deps",
-      "dist": "electron-builder"
+      "dist": "electron-builder --mac --win portable"
    },
    "build": {
       "appId": "com.maheswaranm",
@@ -28,7 +28,7 @@
          "target": "dmg"
       },
       "win": {
-         "target": "nsis"
+         "target": "portable"
       },
       "nsis": {
          "oneClick": false,
